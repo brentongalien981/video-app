@@ -8,7 +8,8 @@ class BsCore2 {
     static appUrl = "";
     static appBackendUrl = "http://biyoristoreexperiment.test:8000";
     // static appApiUrl = "http://biyoristoreexperiment.test:8000/api";
-    static appApiUrl = "http://sqs-test.test:8000/api";
+    // static appApiUrl = "http://sqs-test.test:8000/api";
+    static appApiUrl = "http://bmdauthbackend.test:8000/api";
     // static appApiUrl = "http://Test-WAF-ALB-796476416.us-east-2.elb.amazonaws.com/api";
     static pubPhotoUrl = "https://s3.us-east-2.amazonaws.com/bs.s3.public/photos/";
 
