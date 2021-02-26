@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import Bs from '../../bs-library/helpers/Bs';
 import BsAppStorage from '../../bs-library/helpers/BsAppStorage';
 import BsCore2 from '../../bs-library/helpers/BsCore2';
@@ -35,17 +36,12 @@ class BmdAuthTest extends React.Component {
             method: 'post',
             params: { username: this.state.username, email: this.state.email, password: this.state.password },
             callBackFunc: (requestData, json) => {
-                BsAppStorage.set('accessToken', json.objs.access_token);
 
-                const refreshedState = {
-                    accessToken: 'n/a',
-                    username: '',
-                    email: '',
-                    password: '',
-                    loginMsg: '',
-                };
+                let url = '/success-signup';
+                url += '?accessToken=' + json.objs.access_token;
+                url += '&authProviderId=' + json.objs.authProviderId;
 
-                this.setState({...refreshedState});
+                this.props.history.push(url);
             },
         });
     };
@@ -53,7 +49,18 @@ class BmdAuthTest extends React.Component {
 
 
 
-    onLogin = () => {
+    onLogin = (provider) => {
+
+        switch (provider) {
+            case 'facebook':
+                window.location.replace('https://asbdev.com/test-socialite/auth-providers?provider=facebook');
+                return;
+            case 'google':
+                window.location.replace('https://asbdev.com/test-socialite/auth-providers?provider=google');
+                return;
+        }
+
+
 
         BsCore2.ajaxCrud({
             url: '/passport/get-user-info',
@@ -66,7 +73,7 @@ class BmdAuthTest extends React.Component {
                     loginMsg: json.objs.msg,
                 };
 
-                this.setState({...refreshedState});
+                this.setState({ ...refreshedState });
             },
         });
     };
@@ -81,7 +88,6 @@ class BmdAuthTest extends React.Component {
 
                 <div>
                     <h4>Test Sign-up</h4>
-                    <p>Access Token: {this.state.accessToken}</p>
                     <input
                         name="username"
                         value={this.state.username}
@@ -101,7 +107,14 @@ class BmdAuthTest extends React.Component {
                         type="password"
                     /><br />
                     <button onClick={this.onSignup}>sign-up</button>
+
+                    <h4>- OR -</h4>
+                    <h5>Login through</h5>
+                    <button onClick={() => this.onLogin('facebook')}>facebook</button>
+                    <button onClick={() => this.onLogin('google')}>google</button>
                 </div>
+
+
 
                 <hr /><br /><br />
 
@@ -118,4 +131,4 @@ class BmdAuthTest extends React.Component {
 }
 
 
-export default BmdAuthTest;
+export default withRouter(BmdAuthTest);

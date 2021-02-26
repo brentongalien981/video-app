@@ -8,6 +8,8 @@ import Account from './containers/account/Account';
 import Auth from './containers/auth/Auth';
 import AwsWafTest from './containers/aws-waf-test/AwsWafTest';
 import BmdAuthTest from './containers/bmd-auth-test/BmdAuthTest';
+import SuccessSignup from './containers/bmd-auth-test/SuccessSignup';
+import TestLoggedInUser from './containers/bmd-auth-test/TestLoggedInUser';
 // import CreateVideo from './containers/Videos/CreateVideo';
 
 const CreateVideo = React.lazy(() => import('./containers/Videos/CreateVideo'));
@@ -38,6 +40,7 @@ function App() {
 
                 <NavLink to="/waf" activeClassName="appActiveLink">AWS WAF Test</NavLink><br />
                 <NavLink to="/bmd-auth-test" activeClassName="appActiveLink">BMD Auth Testt</NavLink><br />
+                <NavLink to="/test-loggedin-user" activeClassName="appActiveLink">Test Logged-in User</NavLink><br />
 
                 <br />
 
@@ -53,6 +56,8 @@ function App() {
 
             <Route path="/auth" exact component={Auth} />
             <Route path="/bmd-auth-test" exact component={BmdAuthTest} />
+            <Route path="/success-signup" exact component={SuccessSignup} />
+            <Route path="/test-loggedin-user" exact component={TestLoggedInUser} />
 
             <Route path="/waf" exact component={AwsWafTest} />
 
