@@ -31,13 +31,25 @@ class TestLoggedInUser extends React.Component {
 
 
 
+    getHttpInfo = () => {
+        
+        BsCore2.ajaxCrud({
+            url: '/test/get-http-info',
+            callBackFunc: (requestData, json) => {
+            },
+        });
+    };
+
+
+
     render() {
         return (
             <div>
                 <h2>FILE: TestLoggedInUser.js</h2>
                 <h5>username: {this.state.username}</h5>
                 <h5>email: {this.state.email}</h5>
-                <button onClick={this.getUserInfo}>get-user-info</button>
+                <button onClick={this.getUserInfo}>get-user-info</button><br />
+                <button onClick={this.getHttpInfo}>get-http-info</button>
             </div>
         );
     }

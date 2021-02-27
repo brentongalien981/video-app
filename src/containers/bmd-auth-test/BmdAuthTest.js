@@ -37,11 +37,14 @@ class BmdAuthTest extends React.Component {
             params: { username: this.state.username, email: this.state.email, password: this.state.password },
             callBackFunc: (requestData, json) => {
 
-                let url = '/success-signup';
-                url += '?accessToken=' + json.objs.access_token;
-                url += '&authProviderId=' + json.objs.authProviderId;
+                if (json.isResultOk) {
+                    let url = '/success-signup';
+                    url += '?accessToken=' + json.objs.access_token;
+                    url += '&authProviderId=' + json.objs.authProviderId;
+    
+                    this.props.history.push(url);
+                }
 
-                this.props.history.push(url);
             },
         });
     };
@@ -53,10 +56,10 @@ class BmdAuthTest extends React.Component {
 
         switch (provider) {
             case 'facebook':
-                window.location.replace('https://asbdev.com/test-socialite/auth-providers?provider=facebook');
+                window.location.replace('http://asbdev.com/test-socialite/auth-providers?provider=facebook');
                 return;
             case 'google':
-                window.location.replace('https://asbdev.com/test-socialite/auth-providers?provider=google');
+                window.location.replace('http://asbdev.com/test-socialite/auth-providers?provider=google');
                 return;
         }
 
