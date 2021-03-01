@@ -16,7 +16,10 @@ class TestLoggedInUser extends React.Component {
         BsCore2.ajaxCrud({
             url: '/passport/get-user-info',
             method: 'post',
-            params: { bmdToken: BsAppStorage.get('accessToken') },
+            params: { 
+                bmdToken: BsAppStorage.get('accessToken'),
+                authProviderTypeId: BsAppStorage.get('authProviderId'),
+            },
             callBackFunc: (requestData, json) => {
                 const refreshedState = {
                     username: json.objs.username,
@@ -42,6 +45,21 @@ class TestLoggedInUser extends React.Component {
 
 
 
+    test2 = () => {
+        
+        BsCore2.ajaxCrud({
+            url: '/test/testshit',
+            params: { 
+                bmdToken: BsAppStorage.get('accessToken'),
+                authProviderTypeId: BsAppStorage.get('authProviderId'),
+            },
+            callBackFunc: (requestData, json) => {
+            },
+        });
+    };
+
+
+
     render() {
         return (
             <div>
@@ -50,6 +68,7 @@ class TestLoggedInUser extends React.Component {
                 <h5>email: {this.state.email}</h5>
                 <button onClick={this.getUserInfo}>get-user-info</button><br />
                 <button onClick={this.getHttpInfo}>get-http-info</button>
+                <button onClick={this.test2}>test2</button>
             </div>
         );
     }
